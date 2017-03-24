@@ -8,8 +8,6 @@ using std::string;
 using std::istream;
 using std::ostream;
 
-istream& read(istream &is, Sales_data &item);
-
 struct Sales_data {
     string bookNo;
     unsigned unit_sold = 0;
@@ -37,10 +35,6 @@ struct Sales_data {
     }
 };
 
-Sales_data::Sales_data(istream &is) {
-    read(is, *this);
-}
-
 Sales_data add(const Sales_data &s1, const Sales_data &s2) {
     Sales_data sum = s1;
     sum.combine(s2);
@@ -57,6 +51,10 @@ istream& read(istream &is, Sales_data &item) {
 ostream& print(ostream &os, const Sales_data &item) {
     os << item.isbn() << " " << item.unit_sold << " " << item.revenue;
     return os;
+}
+
+Sales_data::Sales_data(istream &is) {
+    read(is, *this);
 }
 
 #endif
